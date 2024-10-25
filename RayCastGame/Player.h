@@ -9,9 +9,7 @@ class Player
 		sf::RectangleShape PlayerSprite;
 
 	public:
-		Player(float &x,float &y);
 		sf::RectangleShape& GetSprite();
-		
 	    float GetAngle() const;
 		float GetSpeed() const;
 		void SetAngle(float angle);

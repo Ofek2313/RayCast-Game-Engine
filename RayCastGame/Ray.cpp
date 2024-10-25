@@ -58,7 +58,6 @@ void Ray::CastRay(float RayAngle,float playerX, float playerY, std::vector<std::
                     if (distanceX < shortestRay) {
                         shortestRay = distanceX;
                         closestRayEnd = sf::Vector2f(rayX,rayY);
-                        
                     }
                     break;
                    
@@ -104,7 +103,6 @@ void Ray::CastRay(float RayAngle,float playerX, float playerY, std::vector<std::
                         shortestRay = distanceY;
                         closestRayEnd = sf::Vector2f(rayX, rayY);
                         vertical = true;
-                       
                     }
                     break;
                     

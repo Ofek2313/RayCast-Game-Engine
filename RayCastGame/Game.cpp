@@ -1,8 +1,11 @@
 #include "Game.h"
+#include "Shotgun.h"
+#include <iostream>
 #define PI 3.14159265359
 Game::Game(){
 	this -> playerX = 200;
 	this -> playerY = 300;
+  
     player.GetSprite().setSize(sf::Vector2f(10, 10));
 	player.GetSprite().setFillColor(sf::Color::Yellow);
 	player.GetSprite().setPosition(playerX, playerY);
@@ -28,9 +31,14 @@ float Game::getRadian(float angle) {
         return angle * (PI / 180);
 }
 void Game::startGame() {
+
+    Shotgun shotgun("../Images/DoomGun.png");
+    int FrameCount = 0;
     while (window.isOpen())
     {
-
+       
+        
+       
 
 
         sf::Event event;
@@ -68,8 +76,21 @@ void Game::startGame() {
             player.GetSprite().move(-deltaX, -deltaY);
         }
 
+        //Shotgun Reload
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
+            shotgun.setReloadState(true);
+            
+           
+        }
+        if (shotgun.getReloadState()==true) {
+            shotgun.spriteAnimate(FrameCount);
+            FrameCount++;
+        }
+        std::cout << shotgun.getReloadState() << std::endl;
         window.clear();
         player.CastRays(map, window);//Cast Rays
+        window.draw(shotgun.getSprite());
         window.display();
+        
     }
 }

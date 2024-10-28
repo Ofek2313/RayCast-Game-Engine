@@ -14,11 +14,11 @@ Game::Game(){
 
 	setMap({ {1,1,1,1,1,1,1,1},
 			 {1,0,0,0,0,0,0,1},
-			 {1,1,1,1,1,0,0,1},
 			 {1,0,0,0,0,0,0,1},
 			 {1,0,0,0,0,0,0,1},
-			 {1,0,0,0,0,1,0,1},
-			 {1,0,0,0,0,1,0,1},
+			 {1,0,0,0,1,1,0,1},
+			 {1,0,0,0,0,0,0,1},
+			 {1,0,0,0,0,0,0,1},
 			 {1,1,1,1,1,1,1,1,} });
    
 }
@@ -58,7 +58,7 @@ void Game::startGame() {
         //Player Movment And Angle Handling
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
 
-            player.ChangeAngle(-0.05);
+            player.ChangeAngle(-0.03);
 
             if (player.GetAngle() < 0) {
                 player.ChangeAngle(360);
@@ -66,14 +66,14 @@ void Game::startGame() {
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
 
-            player.ChangeAngle(0.05);
+            player.ChangeAngle(0.03);
 
             if (player.GetAngle() > 360) {
                 player.ChangeAngle(-360);
             }
         }
-        deltaX = cos(getRadian(player.GetAngle())) * 0.1;
-        deltaY = sin(getRadian(player.GetAngle())) * 0.1;
+        deltaX = cos(getRadian(player.GetAngle())) * 0.03;
+        deltaY = sin(getRadian(player.GetAngle())) * 0.03;
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
             player.GetSprite().move(deltaX, deltaY);
 
@@ -95,8 +95,9 @@ void Game::startGame() {
         }
         
         window.clear();
-        player.CastRays(map, window);//Cast Rays
+      
         window.draw(shotgun.getSprite());
+        player.CastRays(map, window);//Cast Rays
         window.display();
         
     }

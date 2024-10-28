@@ -48,6 +48,7 @@ bool Shotgun::getReloadState() {
 Shotgun::Shotgun(const std::string& file) {
 	shotgunTexture.loadFromFile(file);
 	ShotgunSprite.setTexture(shotgunTexture);
+	ShotgunSprite.setTextureRect(sf::IntRect(30, 0, 90, 150));
 	ShotgunSprite.setPosition(190, 280);
 	ShotgunSprite.setScale(1.5, 1.5);
 }

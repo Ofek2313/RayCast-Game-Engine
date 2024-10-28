@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "SFML/Audio.hpp"
 #include "Shotgun.h"
 #include <iostream>
 #define PI 3.14159265359
@@ -31,8 +32,13 @@ float Game::getRadian(float angle) {
         return angle * (PI / 180);
 }
 void Game::startGame() {
-
+    sf::SoundBuffer buffer;
+    
+    buffer.loadFromFile("../Sounds/Reload.mp3");
+    sf::Sound ReloadSound;
+    ReloadSound.setBuffer(buffer);
     Shotgun shotgun("../Images/DoomGun.png");
+   
     int FrameCount = 0;
     while (window.isOpen())
     {
@@ -79,14 +85,15 @@ void Game::startGame() {
         //Shotgun Reload
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
             shotgun.setReloadState(true);
-            
+            ReloadSound.play();
            
         }
         if (shotgun.getReloadState()==true) {
+           
             shotgun.spriteAnimate(FrameCount);
             FrameCount++;
         }
-        std::cout << shotgun.getReloadState() << std::endl;
+        
         window.clear();
         player.CastRays(map, window);//Cast Rays
         window.draw(shotgun.getSprite());

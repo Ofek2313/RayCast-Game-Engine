@@ -23,6 +23,7 @@ void Player::CastRays(std::vector<std::vector<int>> map, sf::RenderWindow& windo
 	float distance;
 	float lineH, lineO;
 	bool ver = false;
+
 	
 	 
 	
@@ -34,15 +35,18 @@ void Player::CastRays(std::vector<std::vector<int>> map, sf::RenderWindow& windo
 		lineH = (64 * 320) / distance;
 		lineO = 160 - lineH / 2;
 		if (lineH > 320) lineH = 320;
+		
 
 		sf::RectangleShape shape(sf::Vector2f(8, lineH));
 		
 		
-		shape.setFillColor(sf::Color(0, 250 - (distance*0.5), 0));
+		shape.setFillColor(sf::Color(0, 0, 250 - (distance * 0.5)));
 		
 
 		shape.setPosition(i * 8, lineO);
+		
 		window.draw(shape);
+		
 	}
 
 

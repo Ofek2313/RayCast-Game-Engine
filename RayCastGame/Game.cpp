@@ -31,6 +31,13 @@ void Game::RednerWindow(const float x, const float y) {
 float Game::getRadian(float angle) {
         return angle * (PI / 180);
 }
+void Game::startAudio() {
+    GameBuffer.loadFromFile("../Sounds/Ost.mp3");
+    
+    GameSound.setBuffer(GameBuffer);
+    GameSound.setVolume(90);
+    GameSound.play();
+}
 void Game::startGame() {
    
     
@@ -43,7 +50,7 @@ void Game::startGame() {
     {
        
         
-       
+        
 
 
         sf::Event event;
@@ -74,13 +81,19 @@ void Game::startGame() {
         deltaX = cos(getRadian(player.GetAngle())) * 0.03;
         deltaY = sin(getRadian(player.GetAngle())) * 0.03;
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+            
+           
+            
             player.GetSprite().move(deltaX, deltaY);
 
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-            player.GetSprite().move(-deltaX, -deltaY);
-        }
+           
 
+            player.GetSprite().move(-deltaX, -deltaY);
+            
+        }
+       
         //Shotgun Reload
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
             shotgun.setReloadState(true);
@@ -105,7 +118,7 @@ void Game::startGame() {
             AttackCount++;
 
         }
-
+        
         window.clear();
       
         window.draw(shotgun.getSprite());

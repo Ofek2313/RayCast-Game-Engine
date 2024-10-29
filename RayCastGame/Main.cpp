@@ -10,6 +10,8 @@
 int main()
 { 
     Game game;
+    game.startAudio();
     game.startGame();
+   
     return 0;
 }

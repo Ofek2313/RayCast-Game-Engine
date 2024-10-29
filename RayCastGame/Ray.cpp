@@ -135,7 +135,7 @@ void Ray::CastRay(float RayAngle, float playerX, float playerY, std::vector<std:
 
 
     distances = shortestRay;
-    window.draw(line2, 2, sf::Lines);
+    
 }
 
 

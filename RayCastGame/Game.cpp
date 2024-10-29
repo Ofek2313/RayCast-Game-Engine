@@ -32,14 +32,13 @@ float Game::getRadian(float angle) {
         return angle * (PI / 180);
 }
 void Game::startGame() {
-    sf::SoundBuffer buffer;
+   
     
-    buffer.loadFromFile("../Sounds/Reload.mp3");
-    sf::Sound ReloadSound;
-    ReloadSound.setBuffer(buffer);
+  
     Shotgun shotgun("../Images/DoomGun.png");
    
     int FrameCount = 0;
+    int AttackCount = 0;
     while (window.isOpen())
     {
        
@@ -85,15 +84,28 @@ void Game::startGame() {
         //Shotgun Reload
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
             shotgun.setReloadState(true);
-            ReloadSound.play();
+            shotgun.PlayReloadSound();
+            shotgun.setAmmo(10);
            
         }
         if (shotgun.getReloadState()==true) {
            
-            shotgun.spriteAnimate(FrameCount);
+            shotgun.ReloadAnimate(FrameCount);
             FrameCount++;
         }
         
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && shotgun.getAmmo() > 0 && shotgun.getAttackState()==false) {
+           
+            shotgun.ChangeAmmo(-1);
+            shotgun.setAttackState(true);
+            shotgun.PlayAttackSound();
+        }
+        if (shotgun.getAttackState()) {
+            shotgun.AttackAnimate(AttackCount);
+            AttackCount++;
+
+        }
+
         window.clear();
       
         window.draw(shotgun.getSprite());

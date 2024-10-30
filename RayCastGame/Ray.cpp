@@ -13,7 +13,7 @@ float Ray::distance(float x1, float x2, float y1, float y2) {
 void Ray::CastRay(float RayAngle, float playerX, float playerY, std::vector<std::vector<int>> map, sf::RenderWindow& window, float& distances, bool& vertical) {
 
     sf::CircleShape dot(5);
-    std::vector<int> rays;
+  
     dot.setFillColor(sf::Color::Yellow);
 
     float radianAngle = Get_RadianAngle(RayAngle);
@@ -23,8 +23,7 @@ void Ray::CastRay(float RayAngle, float playerX, float playerY, std::vector<std:
     int advancments, mapX, mapY;
 
     float rayX, rayY, xOff, yOff, rayX2, rayY2;
-    for (size_t i = 0; i < 1; i++)
-    {
+   
 
         if (radianAngle > 2 * PI) {
             radianAngle -= 2 * PI;
@@ -127,7 +126,7 @@ void Ray::CastRay(float RayAngle, float playerX, float playerY, std::vector<std:
         }
 
 
-    }
+    
     sf::Vertex line2[] = {
                       sf::Vertex(sf::Vector2f(playerX,playerY),sf::Color::Red),
                       sf::Vertex(sf::Vector2f(closestRayEnd),sf::Color::Red)

@@ -35,23 +35,20 @@ void Game::startAudio() {
     GameBuffer.loadFromFile("../Sounds/Ost.mp3");
     
     GameSound.setBuffer(GameBuffer);
-    GameSound.setVolume(90);
+    GameSound.setVolume(50);
     GameSound.play();
 }
 void Game::startGame() {
    
     
-  
+    
     Shotgun shotgun("../Images/DoomGun.png");
-   
+
     int FrameCount = 0;
     int AttackCount = 0;
     while (window.isOpen())
     {
-       
-        
-        
-
+     
 
         sf::Event event;
         while (window.pollEvent(event))
@@ -94,6 +91,9 @@ void Game::startGame() {
             
         }
        
+
+
+
         //Shotgun Reload
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
             shotgun.setReloadState(true);
@@ -107,6 +107,9 @@ void Game::startGame() {
             FrameCount++;
         }
         
+
+
+        //Shotgun Fire
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && shotgun.getAmmo() > 0 && shotgun.getAttackState()==false) {
            
             shotgun.ChangeAmmo(-1);
@@ -120,7 +123,6 @@ void Game::startGame() {
         }
         
         window.clear();
-      
         window.draw(shotgun.getSprite());
         player.CastRays(map, window);//Cast Rays
         window.display();

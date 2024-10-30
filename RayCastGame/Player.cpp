@@ -34,7 +34,7 @@ void Player::CastRays(std::vector<std::vector<int>> map, sf::RenderWindow& windo
 		ray.CastRay(rayAngle, PlayerSprite.getPosition().x, PlayerSprite.getPosition().y, map, window, distance, ver);
 		lineH = (64 * 320) / distance;
 		lineO = 160 - lineH / 2;
-		if (lineH > 320) lineH = 320;
+		
 		
 
 		sf::RectangleShape shape(sf::Vector2f(8, lineH));

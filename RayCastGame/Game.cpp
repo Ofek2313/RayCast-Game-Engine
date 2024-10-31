@@ -15,9 +15,9 @@ Game::Game(){
 	setMap({ {1,1,1,1,1,1,1,1},
 			 {1,0,0,0,0,0,0,1},
 			 {1,0,0,0,0,0,0,1},
-			 {1,0,0,0,0,0,0,1},
+			 {1,0,1,1,1,0,0,1},
 			 {1,0,0,0,1,1,0,1},
-			 {1,0,0,0,0,0,0,1},
+			 {1,0,1,1,1,0,0,1},
 			 {1,0,0,0,0,0,0,1},
 			 {1,1,1,1,1,1,1,1,} });
    
@@ -40,15 +40,20 @@ void Game::startAudio() {
 }
 void Game::startGame() {
    
-    
-    
+    sf::Texture text;
+    text.loadFromFile("../Images/bullet.png");
+    sf::Sprite bullet;
+    bullet.setTexture(text);
+    bullet.setScale(0.5, 0.5);
+ 
     Shotgun shotgun("../Images/DoomGun.png");
-
+    sf::RectangleShape enemy(sf::Vector2f(20, 20));
+    enemy.setPosition(100, 100);
     int FrameCount = 0;
     int AttackCount = 0;
     while (window.isOpen())
     {
-     
+       
 
         sf::Event event;
         while (window.pollEvent(event))
@@ -56,7 +61,7 @@ void Game::startGame() {
             if (event.type == sf::Event::Closed)
                 window.close();
         }
-
+     
 
         //Player Movment And Angle Handling
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
@@ -95,7 +100,7 @@ void Game::startGame() {
 
 
         //Shotgun Reload
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::R) && shotgun.getReloadState()==false) {
             shotgun.setReloadState(true);
             shotgun.PlayReloadSound();
             shotgun.setAmmo(10);
@@ -121,10 +126,19 @@ void Game::startGame() {
             AttackCount++;
 
         }
-        
         window.clear();
-        window.draw(shotgun.getSprite());
+      
+   
+      
         player.CastRays(map, window);//Cast Rays
+        window.draw(shotgun.getSprite());
+        for (size_t i = 0; i < shotgun.getAmmo(); i++)
+        {
+            bullet.setPosition(22 * i, 5);
+            window.draw(bullet);
+        }
+  
+   
         window.display();
         
     }

@@ -1,7 +1,7 @@
 #include "Player.h"
 #include "Ray.h"
 #include "SFML/Graphics.hpp"
-
+#define FOV 60
 
 
 
@@ -19,21 +19,24 @@ sf::RectangleShape& Player::GetSprite() { return PlayerSprite; }
 
 void Player::CastRays(std::vector<std::vector<int>> map, sf::RenderWindow& window) {
 	Ray ray;
-	float rayAngle = this->PlayerAngle;
+	
 	float distance;
 	float lineH, lineO;
 	bool ver = false;
+	float rayAngle = this->PlayerAngle;
+
 
 	
-	 
-	
-	for (size_t i = 0; i < 60; i++)
+	for (size_t i = 0; i < FOV; i++)
 	{
-		rayAngle += 1;
-
+		 rayAngle += 1;
 		ray.CastRay(rayAngle, PlayerSprite.getPosition().x, PlayerSprite.getPosition().y, map, window, distance, ver);
-		lineH = (64 * 320) / distance;
-		lineO = 160 - lineH / 2;
+		if (distance > 0) {
+
+		
+			lineH = (64 * 320) / distance;
+			lineO = 160 - lineH / 2;
+		}
 		
 		
 

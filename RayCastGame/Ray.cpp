@@ -131,8 +131,8 @@ void Ray::CastRay(float RayAngle, float playerX, float playerY, std::vector<std:
                       sf::Vertex(sf::Vector2f(playerX,playerY),sf::Color::Red),
                       sf::Vertex(sf::Vector2f(closestRayEnd),sf::Color::Red)
     };
-
-
+    
+   
     distances = shortestRay;
     
 }
